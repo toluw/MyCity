@@ -8,7 +8,7 @@ data class City(
     @PrimaryKey
     var id: Int,
     var name: String?,
-    var country: String,
+    var country: String?,
     var lng : Double?,
     var lat: Double?
     )
