@@ -39,6 +39,21 @@ class CityAdapter():
         holder.cityTextView.text = getItem(position)!!.name
         holder.countryTextView.text = getItem(position)!!.country
 
+        holder.itemView.setOnClickListener {
+
+            onItemClickListener?.let {
+
+                it(getItem(position)!!)
+
+            }
+        }
+
+    }
+
+    private var onItemClickListener: ((City) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (City) -> Unit) {
+        onItemClickListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {

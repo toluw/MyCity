@@ -1,7 +1,9 @@
 package com.tech.mcity.ui
 
 import android.app.SearchManager
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +51,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             viewModel.myCity.collectLatest {
                 cityAdapter.submitData(it)
             }
+        }
+
+        cityAdapter.setOnItemClickListener {
+
+            Log.d("city", it.name!!)
+
+            val intent = Intent(applicationContext, MapActivity::class.java)
+            intent.putExtra("city", it)
+            startActivity(intent)
+
         }
 
     }
