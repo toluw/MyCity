@@ -1,8 +1,11 @@
 package com.tech.mcity.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.SearchManager
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tech.mcity.R
@@ -12,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     lateinit var binding: ActivityMainBinding
 
@@ -48,5 +51,45 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.search, menu)
+
+        val searchManager = getSystemService(SEARCH_SERVICE) as SearchManager
+
+        val searchMenuItem = menu?.findItem(R.id.action_search)
+
+        val  searchView = searchMenuItem!!.actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
+
+
+
+
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+
+        query?.let {
+
+            if(it.isNotEmpty()){
+
+                viewModel.filterCity(it)
+
+            }
+
+        }
+
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+
+        return false
     }
 }
