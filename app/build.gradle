@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -46,7 +47,8 @@ dependencies {
 
 
 
-
+    //Maps SDK
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
     //Navigation
     def nav_version = "2.4.1"
