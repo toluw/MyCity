@@ -56,8 +56,8 @@ class MainRemoteMediator(
 
             val response = api.getCity(loadKey.toString(),filter)
 
-            val currentPage = response.body()!!.data!!.pagination.currentPage
-            val lastPage = response.body()!!.data!!.pagination.lastPage
+            val currentPage = response.data!!.pagination.currentPage
+            val lastPage = response.data.pagination.lastPage
 
             val nextPage = if(currentPage == lastPage){
                 null
@@ -74,7 +74,7 @@ class MainRemoteMediator(
 
                 remoteKeyDao.insertOrReplace(RemoteKey(nextPage))
 
-                cityDao.insertAll(getCityFromNetworkResponse(response.body()!!))
+                cityDao.insertAll(getCityFromNetworkResponse(response))
 
             }
 
