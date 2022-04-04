@@ -42,7 +42,7 @@ constructor(private val repository: Repository, private val savedStateHandle: Sa
 
 
 
-     fun filterCity(filter: String){
+     fun filterCity(filter: String?){
 
         savedStateHandle.set(FILTER_KEY,filter)
 

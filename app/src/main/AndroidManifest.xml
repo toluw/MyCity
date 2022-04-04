@@ -16,6 +16,7 @@
         android:theme="@style/Theme.MCity">
         <activity
             android:name=".ui.MapActivity"
+            android:theme="@style/Theme.NCity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
